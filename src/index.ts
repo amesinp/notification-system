@@ -23,3 +23,5 @@ app.use(defaultErrorHandler);
 
 const serverPort = process.env.PORT || 8080;
 app.listen(serverPort, () => console.log(`Server running on PORT ${serverPort}`));
+
+export default app;

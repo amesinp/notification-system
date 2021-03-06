@@ -12,6 +12,7 @@ COPY .eslintrc.json .
 COPY .prettierrc.json .
 COPY tsconfig.json .
 COPY src ./src
+COPY test ./test
 
 # Start dev server
 CMD [ "npm", "run", "dev" ]

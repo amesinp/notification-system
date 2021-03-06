@@ -1,0 +1,22 @@
+version: '3'
+services:
+  test_db:
+    image: 'postgres'
+    restart: 'always'
+    environment:
+      - POSTGRES_DB=notification_system_test
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+
+  test:
+    image: notification-system-v1-test
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: sh -c "npm run migrations:dev && npm test"
+    depends_on:
+      - test_db
+    volumes:
+      - './test:/app/test'
+    environment:
+      - DATABASE_URL=postgresql://root:password@test_db:5432/notification_system_test
