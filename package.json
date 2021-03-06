@@ -9,6 +9,8 @@
     "dev": "tsc -w & nodemon .",
     "lint": "eslint **/*.ts --fix",
     "format": "prettier --config .prettierrc.json --write **/*.ts",
+    "migrations:dev": "prisma migrate dev --preview-feature",
+    "migrations:deploy": "prisma migrate deploy --preview-feature",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },

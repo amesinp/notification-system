@@ -1,0 +1,36 @@
+version: '3'
+services:
+  db:
+    image: 'postgres'
+    restart: 'always'
+    volumes:
+      - ~/postgres/data:/data/db
+    environment:
+      - POSTGRES_DB=notification_system
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+
+  api:
+    image: 'notification-system-v1'
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '5000:5000'
+    volumes:
+      - './src:/app/src'
+      - './prisma:/app/prisma'
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+      - DATABASE_URL=postgresql://root:password@db:5432/notification_system
+
+  migration:
+    image: 'notification-system-v1:latest'
+    command: ['npm', 'run', 'migrations:dev']
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://root:password@db:5432/notification_system

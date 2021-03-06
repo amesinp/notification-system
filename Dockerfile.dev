@@ -1,0 +1,17 @@
+FROM node:alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package.json .
+COPY prisma ./prisma
+RUN npm install
+
+# Copy source files
+COPY .eslintrc.json .
+COPY .prettierrc.json .
+COPY tsconfig.json .
+COPY src ./src
+
+# Start dev server
+CMD [ "npm", "run", "dev" ]
