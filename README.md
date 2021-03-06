@@ -10,4 +10,7 @@ Simple HTTP notification system that allows subscription to topics and publishes
 
 - Install dependencies using `npm install` command
 - Create a new file named `.env` using `.env.example` as a guide and setup the environment variables
+- Run database migrations
+  - For development environments: `prisma migrate dev --preview-feature`
+  - For non-development environemnts: `prisma migrate deploy --preview-feature`
 - Run `npm run dev` to start a development server or `npm start` to start a production server

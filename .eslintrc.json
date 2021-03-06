@@ -20,6 +20,14 @@
     ],
     "rules": {
         "no-console": "off",
+        "import/extensions": "off",
         "prettier/prettier": 2
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".ts"]
+            }
+        }
     }
 }

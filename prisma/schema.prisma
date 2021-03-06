@@ -1,0 +1,19 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Subscription {
+  id    Int    @id @default(autoincrement())
+  url   String @db.VarChar(255)
+  topic String @db.VarChar(255)
+
+  @@unique([url, topic], name: "Subscription_unique_url_topic")
+}
