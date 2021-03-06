@@ -52,7 +52,7 @@ export async function publishToTopic(req: Request, res: Response, next: NextFunc
       where: { topic }
     });
 
-    const promises = subscribers.map((x) => axios.post(x.url, { topic: topic, data }));
+    const promises = subscribers.map((x) => axios.post(x.url, { topic, data }));
     await Promise.all(promises).catch((err) => {
       throw new HttpError(503, `Failed to push to subscriber: ${err.config.url}`);
     });
